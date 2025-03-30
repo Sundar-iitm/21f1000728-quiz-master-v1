@@ -1,0 +1,36 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h3 class="text-center text-danger">Confirm Deletion</h3>
+        <p class="text-center">Are you sure you want to delete the quiz <strong>{{ quiz.name }}</strong>?</p>
+
+        <!-- Quiz Details -->
+        <div class="mb-3">
+            <h5>Quiz Details</h5>
+            <p><strong>ID:</strong> {{ quiz.id }}</p>
+            <p><strong>Name:</strong> {{ quiz.name }}</p>
+            <p><strong>Description:</strong> {{ quiz.description }}</p>
+            <p><strong>Duration:</strong> {{ quiz.duration }} minutes</p>
+            <p><strong>Date:</strong> {{ quiz.date if quiz.date else 'No specific date set' }}</p>
+        </div>
+
+        <!-- Chapter Details -->
+        <div class="mb-3">
+            <h5>Chapter Details</h5>
+            <p><strong>Chapter Name:</strong> {{ quiz.chapter.name }}</p>
+            <p><strong>Chapter Description:</strong> {{ quiz.chapter.description }}</p>
+        </div>
+
+        <!-- Delete Confirmation Form -->
+        <form method="POST" action="{{ url_for('quiz_delete_post', quiz_id=quiz.id) }}">
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="{{ url_for('admin_chapter', chapter_id=quiz.chapter_id) }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

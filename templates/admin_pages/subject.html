@@ -1,0 +1,78 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h3 class="text-primary text-center">Subject Details</h3>
+        <p><strong>ID:</strong> {{ subject.id }}</p>
+        <p><strong>Name:</strong> {{ subject.name }}</p>
+        <p><strong>Description:</strong> {{ subject.description }}</p>
+        
+        <!-- Edit & Delete Buttons -->
+        <div class="mb-3">
+            <a href="{{ url_for('subject_edit', subject_id=subject.id) }}" class="btn btn-warning">
+                <i class="bi bi-pencil-square"></i> Edit
+            </a>
+            <a href="{{ url_for('subject_delete', subject_id=subject.id) }}" class="btn btn-danger">
+                <i class="bi bi-trash"></i> Delete
+            </a>
+        </div>
+
+        <!-- Search/Filter Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <input type="text" id="search" class="form-control w-50" placeholder="Search by ID or Name">
+            <a href="{{ url_for('chapter_add', subject_id=subject.id) }}" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Add Chapter
+            </a>
+        </div>
+
+        <!-- Chapters Table -->
+        {% if subject.chapters %}
+        <table class="table table-bordered" id="chaptersTable">
+            <thead class="table-light">
+                <tr>
+                    <th>Chapter ID</th>
+                    <th>Chapter Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chapter in subject.chapters %}
+                <tr>
+                    <td>{{ chapter.id }}</td>
+                    <td>{{ chapter.name }}</td>
+                    <td>
+                        <a href="{{ url_for('admin_chapter', chapter_id=chapter.id) }}" class="btn btn-info btn-sm">
+                            <i class="bi bi-eye"></i> View
+                        </a>
+                        
+                        <a href="{{ url_for('chapter_edit', chapter_id=chapter.id) }}" class="btn btn-warning btn-sm">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+                        <a href="{{ url_for('chapter_delete', chapter_id=chapter.id) }}" class="btn btn-danger btn-sm">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-center text-muted">No chapters found in this subject.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    document.getElementById('search').addEventListener('input', function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll('#chaptersTable tbody tr');
+        rows.forEach(row => {
+            let id = row.cells[0].innerText.toLowerCase();
+            let name = row.cells[1].innerText.toLowerCase();
+            row.style.display = id.includes(filter) || name.includes(filter) ? '' : 'none';
+        });
+    });
+</script>
+{% endblock %}

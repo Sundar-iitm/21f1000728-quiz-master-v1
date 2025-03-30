@@ -1,0 +1,51 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'user_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="text-primary">Subjects</h2>
+    </div>
+
+    <!-- Search Filter -->
+    <input type="text" id="searchInput" class="form-control mt-3 mb-3" placeholder="Search by Subject ID or Name">
+
+    <!-- Subjects Table -->
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Subject ID</th>
+                    <th>Subject Name</th>
+                    <th>Navigate</th>
+                </tr>
+            </thead>
+            <tbody id="subjectTable">
+                {% for subject in subjects %}
+                <tr>
+                    <td>{{ subject.id }}</td>
+                    <td>{{ subject.name }}</td>
+                    <td>
+                        <a href="{{ url_for('user_subject', subject_id=subject.id) }}" class="btn btn-info btn-sm">
+                            <i class="bi bi-eye"></i> Go to Page
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+        let filter = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#subjectTable tr");
+        rows.forEach(row => {
+            let id = row.cells[0].textContent.toLowerCase();
+            let name = row.cells[1].textContent.toLowerCase();
+            row.style.display = (id.includes(filter) || name.includes(filter)) ? "" : "none";
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "other_pages/layout.html" %}
+{% include 'admin_pages/navbar.html' %}
+
+
+{% block title %}Edit Option{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="text-center text-primary">Edit Option</h3>
+
+    <form method="POST" action="{{ url_for('option_edit', option_id=option.id) }}">
+        <!-- Option Field -->
+        <div class="form-group">
+            <label for="option_text">Option Text</label>
+            <textarea class="form-control" id="option_text" name="option_text" rows="3">{{ option.option_text }}</textarea>
+        </div>
+
+        <!-- Correct Answer Checkbox -->
+        <div class="form-group">
+            <label for="is_correct">Is Correct?</label>
+            <input type="checkbox" id="is_correct" name="is_correct" {% if option.is_correct %}checked{% endif %}>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Update Option</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

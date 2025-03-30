@@ -1,0 +1,55 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'user_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="text-center text-primary">Home</h3>
+
+    <!-- Table 1: Quizzes -->
+    <div class="card shadow-sm p-4 mb-4">
+        <h5 class="text-center">Available Quizzes</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Quiz ID</th>
+                    <th>Quiz Name</th>
+                    <th>Take Quiz</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz in quizzes %}
+                    <tr>
+                        <td>{{ quiz.id }}</td>
+                        <td>{{ quiz.name }}</td>
+                        <td><a href="{{ url_for('take_quiz', quiz_id=quiz.id) }}" class="btn btn-info">Take Quiz</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Table 2: User Scores -->
+    <div class="card shadow-sm p-4">
+        <h5 class="text-center">Your Scores</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Score ID</th>
+                    <th>Quiz Name</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for score in user_scores %}
+                    <tr>
+                        <td>{{ score.id }}</td>
+                        <td>{{ score.quiz.name }}</td>
+                        <td>{{ score.score }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

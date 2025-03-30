@@ -1,0 +1,48 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'user_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="text-center text-primary">Summary</h3>
+
+    <!-- Quiz Completion by Date -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="text-center">Quiz Completion by Date</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Quizzes Completed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for date, count in date_counts.items() %}
+                    <tr>
+                        <td>{{ date }}</td>
+                        <td>{{ count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Score Statistics -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-center">Score Statistics</h5>
+        </div>
+        <div class="card-body">
+            <ul>
+                <li>Total Scores: {{ total_scores }}</li>
+                <li>Average Score: {{ average_score }}</li>
+                <li>Highest Score: {{ max_score }}</li>
+                <li>Lowest Score: {{ min_score }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

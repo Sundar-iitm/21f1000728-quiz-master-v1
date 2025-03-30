@@ -1,0 +1,42 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Quiz</h2>
+    <form action="{{ url_for('quiz_add_post') }}" method="post">
+        <div class="mb-3">
+            <label for="quiz_name" class="form-label">Quiz Name</label>
+            <input type="text" class="form-control" id="quiz_name" name="quiz_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="chapter_id" class="form-label">Select Chapter</label>
+            <select class="form-control" id="chapter_id" name="chapter_id" required>
+                <option value="" disabled selected>Select a chapter</option>
+                {% for chapter in chapters %}
+                    <option value="{{ chapter.id }}">{{ chapter.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration (minutes)</label>
+            <input type="number" class="form-control" id="duration" name="duration" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="date" class="form-label">Quiz Date (optional)</label>
+            <input type="date" class="form-control" id="date" name="date">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a href="{{ url_for('admin_create') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

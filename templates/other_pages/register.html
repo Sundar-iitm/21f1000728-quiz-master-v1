@@ -1,0 +1,55 @@
+{% extends 'other_pages/layout.html' %}
+
+{% block title %}
+    User Registration
+{% endblock %}
+
+{% block content %}
+<br/><br/>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4" style="width: 450px;">
+        <h1 class="display-6 text-center">Welcome!</h1>
+        <h3 class="fw-lighter text-center">Please register to continue</h3>
+
+        <form action="" method="POST" class="mt-3">
+            
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" name="username" required class="form-control" placeholder="Enter unique username">
+            </div>
+
+            <div class="mb-3">
+                <label for="full_name" class="form-label">Full Name:</label>
+                <input type="text" name="full_name" required class="form-control" placeholder="Enter your full name">
+            </div>
+
+            <div class="mb-3">
+                <label for="qualification" class="form-label">Qualification:</label>
+                <input type="text" name="qualification" required class="form-control" placeholder="Your highest qualification">
+            </div>
+
+            <div class="mb-3">
+                <label for="dob" class="form-label">Date of Birth:</label>
+                <input type="date" name="dob" required class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" name="password" class="form-control" required placeholder="Create a password">
+            </div>
+
+            <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirm Password:</label>
+                <input type="password" name="confirm_password" class="form-control" required placeholder="Re-enter password">
+            </div>
+
+            <div class="d-grid gap-2">
+                <input type="submit" value="Register" class="btn btn-primary">
+                <p class="text-center mt-2">Have an account? <a href="{{ url_for('login') }}">Login</a></p>
+            </div>
+
+        </form>
+    </div>
+</div>
+<br/><br/>
+{% endblock %}

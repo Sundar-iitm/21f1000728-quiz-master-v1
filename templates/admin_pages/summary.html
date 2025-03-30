@@ -1,0 +1,58 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="text-center text-primary">Admin Summary</h3>
+
+    <!-- Total Users -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="text-center">Total Users</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-center">{{ total_users }}</p>
+        </div>
+    </div>
+
+    <!-- Total Quizzes -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="text-center">Total Quizzes</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-center">{{ total_quizzes }}</p>
+        </div>
+    </div>
+
+    <!-- Total Subjects -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="text-center">Total Subjects</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-center">{{ total_subjects }}</p>
+        </div>
+    </div>
+
+    <!-- Total Chapters -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="text-center">Total Chapters</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-center">{{ total_chapters }}</p>
+        </div>
+    </div>
+
+    <!-- Average Score -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="text-center">Average Score of All Users</h5>
+        </div>
+        <div class="card-body">
+            <p class="text-center">{{ average_score }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add Chapter</h2>
+    <form action="{{ url_for('chapter_add_post') }}" method="post">
+        <div class="mb-3">
+            <label for="chapter_name" class="form-label">Chapter Name</label>
+            <input type="text" class="form-control" id="chapter_name" name="chapter_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="subject_id" class="form-label">Select Subject</label>
+            <select class="form-control" id="subject_id" name="subject_id" required>
+                <option value="" disabled selected>Select a subject</option>
+                {% for subject in subjects %}
+                    <option value="{{ subject.id }}">{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a href="{{ url_for('admin_create') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

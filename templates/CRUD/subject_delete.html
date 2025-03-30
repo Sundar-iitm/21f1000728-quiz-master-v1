@@ -1,0 +1,54 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h3 class="text-center text-danger">Confirm Deletion</h3>
+        <p class="text-center">Are you sure you want to delete the subject <strong>{{ subject.name }}</strong>?</p>
+
+        <!-- Subject Details -->
+        <div class="mb-3">
+            <h5>Subject Details</h5>
+            <p><strong>ID:</strong> {{ subject.id }}</p>
+            <p><strong>Name:</strong> {{ subject.name }}</p>
+            <p><strong>Description:</strong> {{ subject.description }}</p>
+        </div>
+
+        <!-- List of Chapters -->
+        {% if subject.chapters %}
+        <div class="mb-3">
+            <h5>Chapters in this Subject</h5>
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Chapter ID</th>
+                        <th>Chapter Name</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for chapter in subject.chapters %}
+                    <tr>
+                        <td>{{ chapter.id }}</td>
+                        <td>{{ chapter.name }}</td>
+                        <td>{{ chapter.description }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="text-center text-muted">No chapters found in this subject.</p>
+        {% endif %}
+
+        <!-- Delete Confirmation Form -->
+        <form method="POST" action="{{ url_for('subject_delete_post', subject_id=subject.id) }}">
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="{{ url_for('admin_nav_subjects') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

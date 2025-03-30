@@ -1,0 +1,30 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th class="text-white">User ID</th>
+                <th class="text-white">Username</th>
+                <th class="text-white">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>
+                    <a href="{{ url_for('admin_user', user_id=user.id) }}" class="btn btn-info">View</a>
+                    <a href="{{ url_for('user_delete', user_id=user.id) }}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h3 class="text-center text-danger">Confirm Deletion</h3>
+        <p class="text-center">Are you sure you want to delete the chapter <strong>{{ chapter.name }}</strong>?</p>
+
+        <!-- Chapter Details -->
+        <div class="mb-3">
+            <h5>Chapter Details</h5>
+            <p><strong>ID:</strong> {{ chapter.id }}</p>
+            <p><strong>Name:</strong> {{ chapter.name }}</p>
+            <p><strong>Description:</strong> {{ chapter.description }}</p>
+        </div>
+
+        <!-- Subject Details -->
+        <div class="mb-3">
+            <h5>Subject Details of this Chapter</h5>
+            <p><strong>Subject Name:</strong> {{ chapter.subject.name }}</p>
+            <p><strong>Subject Description:</strong> {{ chapter.subject.description }}</p>
+        </div>
+
+        <!-- Delete Confirmation Form -->
+        <form method="POST" action="{{ url_for('chapter_delete_post', chapter_id=chapter.id) }}">
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-danger">Delete</button>
+                <a href="{{ url_for('admin_subject', subject_id=chapter.subject_id) }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

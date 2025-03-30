@@ -1,0 +1,38 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4"><br/><br/>
+    <div class="row">
+        <!-- Subject Box -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Subject</h5>
+                    <a href="{{ url_for('subject_add') }}" class="btn btn-primary">Create Subject</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Box -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Chapter</h5>
+                    <a href="{{ url_for('chapter_add') }}" class="btn btn-primary">Create Chapter</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Box -->
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Quiz</h5>
+                    <a href="{{ url_for('quiz_add') }}" class="btn btn-primary">Create Quiz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

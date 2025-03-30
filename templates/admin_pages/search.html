@@ -1,0 +1,81 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="text-center text-primary">Search</h3>
+
+    <!-- Search Form -->
+    <form action="{{ url_for('admin_search') }}" method="GET">
+        <div class="input-group mb-4">
+            <!-- Dropdown to select table -->
+            <select class="form-control" name="search_type">
+                <option value="users" {% if request.args.get('search_type') == 'users' %}selected{% endif %}>Users</option>
+                <option value="subjects" {% if request.args.get('search_type') == 'subjects' %}selected{% endif %}>Subjects</option>
+                <option value="chapters" {% if request.args.get('search_type') == 'chapters' %}selected{% endif %}>Chapters</option>
+                <option value="quizzes" {% if request.args.get('search_type') == 'quizzes' %}selected{% endif %}>Quizzes</option>
+            </select>
+            
+            <!-- Search input for ID and Name -->
+            <input type="text" class="form-control" name="query" placeholder="Search by ID or Name..." value="{{ request.args.get('query', '') }}">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+    </form>
+
+    {% if results %}
+    <!-- Display Search Results in Tables -->
+    <div class="card shadow-sm p-4">
+        <h5 class="text-center">Search Results</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Navigate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if 'users' in results %}
+                    {% for user in results['users'] %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td><a href="{{ url_for('admin_user', user_id=user.id) }}" class="btn btn-info">Go to Page</a></td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                {% if 'subjects' in results %}
+                    {% for subject in results['subjects'] %}
+                    <tr>
+                        <td>{{ subject.id }}</td>
+                        <td>{{ subject.name }}</td>
+                        <td><a href="{{ url_for('admin_subject', subject_id=subject.id) }}" class="btn btn-info">Go to Page</a></td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                {% if 'chapters' in results %}
+                    {% for chapter in results['chapters'] %}
+                    <tr>
+                        <td>{{ chapter.id }}</td>
+                        <td>{{ chapter.name }}</td>
+                        <td><a href="{{ url_for('admin_chapter', chapter_id=chapter.id) }}" class="btn btn-info">Go to Page</a></td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+                {% if 'quizzes' in results %}
+                    {% for quiz in results['quizzes'] %}
+                    <tr>
+                        <td>{{ quiz.id }}</td>
+                        <td>{{ quiz.name }}</td>
+                        <td><a href="{{ url_for('admin_quiz', quiz_id=quiz.id) }}" class="btn btn-info">Go to Page</a></td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-center">No results found.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'user_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h3 class="text-primary text-center">Quiz Result</h3>
+        <p><strong>Quiz Name:</strong> {{ quiz.name }}</p>
+        <p><strong>Your Score:</strong> {{ score.score }} / {{ quiz.questions|length }}</p>
+        <p><strong>Completion:</strong> {{ score.completion }}</p>
+        <p><strong>Timestamp:</strong> {{ score.timestamp }}</p>
+
+        <!-- Go back button to user's home -->
+        <div class="mt-4">
+            <a href="{{ url_for('user_home') }}" class="btn btn-primary">Go Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

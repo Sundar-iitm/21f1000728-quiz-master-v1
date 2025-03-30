@@ -1,0 +1,39 @@
+{% extends 'other_pages/layout.html' %}
+{% include 'admin_pages/navbar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h3 class="text-center text-primary">Edit Quiz: {{ quiz.name }}</h3>
+
+        <!-- Quiz Edit Form -->
+        <form method="POST" action="{{ url_for('quiz_edit_post', quiz_id=quiz.id) }}">
+            <div class="mb-3">
+                <label for="quiz_name" class="form-label">Quiz Name</label>
+                <input type="text" class="form-control" id="quiz_name" name="quiz_name" value="{{ quiz.name }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4" required>{{ quiz.description }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="duration" class="form-label">Duration (minutes)</label>
+                <input type="number" class="form-control" id="duration" name="duration" value="{{ quiz.duration }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="date" class="form-label">Date (Optional)</label>
+                <input type="date" class="form-control" id="date" name="date" value="{{ quiz.date if quiz.date else '' }}">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="{{ url_for('admin_chapter', chapter_id=quiz.chapter_id) }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

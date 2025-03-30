@@ -1,0 +1,58 @@
+<nav class="navbar">
+    <ul class="nav-links">
+        <li class="back-button">
+            <a href="javascript:history.back()">
+                <i class="bi bi-arrow-left-circle"></i>
+            </a>
+        </li>
+        <li>
+            <a href="{{ url_for('user_home') }}">Home</a>
+        </li>
+        <li>
+            <a href="{{ url_for('user_profile') }}">Profile</a>
+        </li>
+        <li>
+            <a href="{{ url_for('user_nav_subjects') }}">Subjects</a>
+        </li>
+        <li>
+            <a href="{{ url_for('user_summary') }}">Summary</a>
+        </li>
+    </ul>
+    <ul class="logout-container">
+        <li class="logout">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </li>
+    </ul>
+</nav>
+
+<style>
+    .navbar {
+        background-color: #333;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .nav-links, .logout-container {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+    .nav-links li a, .logout a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 12px;
+    }
+    .logout-container {
+        margin-left: auto;
+    }
+    .back-button a {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        padding: 8px;
+    }
+</style>

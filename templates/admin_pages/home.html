@@ -1,0 +1,45 @@
+{% extends "other_pages/layout.html" %}
+
+{% include 'admin_pages/navbar.html'   %}
+{% block title %}
+    Admin Homepage
+{% endblock %}
+
+{% block content %}
+
+<br/><br/>
+<div class="heading">
+    <div class="profile-pic">
+        <img src="https://api.dicebear.com/9.x/notionists/svg?seed={{ admin.username }}" alt="Admin Profile" />
+    </div>
+    <h1 class="display-1">{{ admin.username }}</h1>
+</div>
+
+<div class="action-buttons text-center my-3">
+    <a href="{{ url_for('admin_update_profile') }}" class="btn btn-outline-primary">Update Profile</a>
+</div>
+
+{% endblock %}
+
+{% block style %}
+<style>
+    .heading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .profile-pic {
+        width: 200px;
+        height: 200px;
+        border: 5px solid black;
+        border-radius: 10%;
+        overflow: hidden;
+    }
+    .profile-pic img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+{% endblock %}
